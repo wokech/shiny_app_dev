@@ -37,7 +37,8 @@ ui <- fluidPage(
                                                 "Westlands", "Eastleigh"),
                                     selected = "Donholm")),
                       # Location and price output ----
-                      column(h3("The change in land prices between 2015 and the present"), 
+                      column(h3("The change in land prices between 2015 and the present"),
+                             h5("*[Q1 = .00, Q2 = .25, Q3 = .50, and Q4 = .75]"),
                              width = 10, plotlyOutput(outputId = "landprice_linePlot_1"),
                              h3("A map of the selected locations"),
                              leafletOutput("map_1")))))),
@@ -52,6 +53,7 @@ ui <- fluidPage(
                                     selected = "Athi River")),
                         # Location, price, and location output ----
                         column(h3("The change in land prices between 2015 and the present"),
+                               h5("*[Q1 = .00, Q2 = .25, Q3 = .50, and Q4 = .75]"),
                                width = 10, plotlyOutput(outputId = "landprice_linePlot_2"),
                                h3("A map of the selected locations"),
                                leafletOutput("map_2")))))),

@@ -60,7 +60,7 @@ all_data_percentile_price <- all_data %>%
 all_data_avg_price_data <- all_data %>%
   select(Location = location, Year = year, Quarter = quarter, "Average Price (KShs)" = average_price)
 
-str(all_data_avg_price$"Year + Quarter")
+str(all_data_avg_price$quarter_year)
 str(all_data_percentile_price)
 str(all_data_avg_price_data)
 
@@ -151,8 +151,8 @@ all_data_avg_price %>%
 
 ### TESTS FOR THE APP ###
 
-land_price <- readRDS("C:/R_Files/afrodataviz/sub_pro_3_hass_land_prices/hass_land_price_app/all_data_avg_price.rds")
-land_price_data <- readRDS("C:/R_Files/afrodataviz/sub_pro_3_hass_land_prices/hass_land_price_app/all_data_avg_price_data.rds")
+land_price <- readRDS("hass_land_price_app/hass_land_price_app/all_data_avg_price.rds")
+land_price_data <- readRDS("hass_land_price_app/hass_land_price_app/all_data_avg_price_data.rds")
 
 land_price %>%
   group_by(location) %>%
