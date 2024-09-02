@@ -36,7 +36,12 @@ ui <- fluidPage(
            data table allow the user to visualize visitor numbers, and
            compare trends over multiple years."),
         h3("Data Source"),
-        p("Kenya Parks Investments Prospectus 2023 and Economic Surveys (2009 - 2024)")
+        p("Kenya Parks Investments Prospectus 2023"),
+        tags$a(href="https://www.kws.go.ke/", "Website"),
+        p(""),
+        p("Economic Surveys (2009 - 2024)"),
+        tags$a(href="https://www.knbs.or.ke/", "Website")
+        
       )
     ),
     
