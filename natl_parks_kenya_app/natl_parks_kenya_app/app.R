@@ -12,7 +12,7 @@ parks_data <- readRDS("nat_parks_ke_data.rds")
 
 # Define UI with a fluidPage, navbarPage, and multiple tabPanels
 ui <- fluidPage(
-  theme = shinytheme("flatly"),  # Use a modern and clean theme
+  theme = shinytheme("spacelab"),  # Use a modern and clean theme
   
   # Navbar with multiple pages
   navbarPage(
@@ -23,15 +23,26 @@ ui <- fluidPage(
       "Introduction",
       fluidPage(
         titlePanel("Project Introduction"),
-        h3("Overview"),
-        p("This Shiny app provides insights into visitor trends in Kenya's National Parks from 2018 to 2022."),
-        p("Explore different parks, visualize their visitor data, and compare trends over the years. The interactive map displays park locations, and you can analyze the data in a user-friendly table format.")
+        h3("Background"),
+        p("The Kenya Wildlife Service manages all of Kenya's National Parks, 
+           Reserves, Sanctuaries, and Stations. Its mission is 'to sustainably 
+           manage Kenya's wildlife and its habitats for the benefit of nature 
+           and humanity' and its vision is 'conserve Kenya's wildlife and 
+           its habitats for posterity"),
+        
+        p("This app was developed to provide insights into the visitor 
+           number data over a specified period of time. Using the interactive 
+           map one can view the park locations. Additionally, the graphs and 
+           data table allow the user to visualize visitor numbers, and
+           compare trends over multiple years."),
+        h3("Data Source"),
+        p("Kenya Parks Investments Prospectus 2023 and Economic Surveys (2009 - 2024)")
       )
     ),
     
     # Page 2: Interactive App
     tabPanel(
-      "Interactive Visualization",
+      "Visitor Numbers",
       fluidPage(
         titlePanel("Explore Kenya's National Parks"),
         
@@ -47,10 +58,10 @@ ui <- fluidPage(
           ),
           
           mainPanel(
-            
+            h3("Visitor Numbers"),
             # Display the plot with plotly for interactivity
             plotlyOutput(outputId = "visitors_plot", height = "400px"),
-            
+            h3("A map of the selected locations"),
             # Display the map with an initial view of Kenya
             leafletOutput(outputId = "parks_map", height = "400px")
           )
@@ -96,10 +107,10 @@ server <- function(input, output) {
     # Create the ggplot object
     p <- ggplot(selected_parks_data(), aes(x = year, y = visitors, color = park, group = park, 
                                            text = paste("Park:", park, "<br>Year:", year, "<br>Visitors:", visitors))) +
-      geom_line(size = 1.2) +
+      geom_line(linewidth = 1.2) +
       geom_point(size = 3) +
       labs(
-        title = "Visitors Over Time - Selected Parks",
+        title = "",
         x = "Year",
         y = "Number of Visitors",
         color = "Park"
