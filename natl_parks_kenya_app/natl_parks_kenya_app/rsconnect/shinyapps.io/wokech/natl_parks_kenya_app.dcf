@@ -5,7 +5,7 @@ account: wokech
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 12582457
-bundleId: 9053288
+bundleId: 9053447
 url: https://wokech.shinyapps.io/natl_parks_kenya_app/
 version: 1
 asMultiple: FALSE

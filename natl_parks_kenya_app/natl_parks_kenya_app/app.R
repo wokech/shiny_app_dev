@@ -12,7 +12,7 @@ parks_data <- readRDS("nat_parks_ke_data.rds")
 
 # Define UI with a fluidPage, navbarPage, and multiple tabPanels
 ui <- fluidPage(
-  theme = shinytheme("spacelab"),  # Use a modern and clean theme
+  theme = shinytheme("sandstone"),  # Use a modern and clean theme
   
   # Navbar with multiple pages
   navbarPage(
@@ -65,10 +65,10 @@ ui <- fluidPage(
           mainPanel(
             h3("Visitor Numbers"),
             # Display the plot with plotly for interactivity
-            plotlyOutput(outputId = "visitors_plot", height = "400px"),
+            plotlyOutput(outputId = "visitors_plot", height = "300px"),
             h3("A map of the selected locations"),
             # Display the map with an initial view of Kenya
-            leafletOutput(outputId = "parks_map", height = "400px")
+            leafletOutput(outputId = "parks_map", height = "300px")
           )
         )
       )
@@ -120,15 +120,21 @@ server <- function(input, output) {
         y = "Number of Visitors",
         color = "Park"
       ) +
-      theme_minimal() +
+      theme_classic() +
       theme(
+        legend.position = "bottom",
         plot.title = element_text(size = 16, face = "bold", hjust = 0.5, color = "#007aff"),
         axis.title = element_text(size = 14),
         axis.text = element_text(size = 12)
+        
       )
     
     # Convert ggplot to plotly with specified tooltip content
-    ggplotly(p, tooltip = "text")
+    ggplotly(p, tooltip = "text") |>
+      layout(legend = list(orientation = "h", # horizontal layout
+                           xanchor = "center", # use center as anchor
+                           x = 0.5, # center horizontally
+                           y = -0.5)) # move below the plot
   })
   
   # Render the data table using DT
