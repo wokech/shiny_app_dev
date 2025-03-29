@@ -95,6 +95,7 @@ all_data_avg_price %>%
   filter(location %in% location_1) %>%
   ggplot(aes(quarter_year, average_price, color = location)) +
   geom_line() +
+  geom_point() +
   theme_classic() + 
   scale_y_continuous(labels = scales::comma) 
   
@@ -102,6 +103,7 @@ all_data_avg_price %>%
   filter(location %in% location_2) %>%
   ggplot(aes(quarter_year, average_price, color = location)) +
   geom_line() +
+  geom_point() +
   theme_classic() + 
   scale_y_continuous(labels = scales::comma) 
 
@@ -109,6 +111,7 @@ all_data_avg_price %>%
   filter(location %in% location_3) %>%
   ggplot(aes(quarter_year, average_price, color = location)) +
   geom_line() +
+  geom_point() +
   theme_classic() + 
   scale_y_continuous(labels = scales::comma) 
 
@@ -116,6 +119,7 @@ all_data_avg_price %>%
   filter(location %in% location_4) %>%
   ggplot(aes(quarter_year, average_price, color = location)) +
   geom_line() +
+  geom_point() +
   theme_classic() + 
   scale_y_continuous(labels = scales::comma) 
 
@@ -123,6 +127,7 @@ all_data_avg_price %>%
   filter(location %in% location_5) %>%
   ggplot(aes(quarter_year, average_price, color = location)) +
   geom_line() +
+  geom_point() +
   theme_classic() + 
   scale_y_continuous(labels = scales::comma) 
 
