@@ -2,7 +2,7 @@
 
 This repo contains code and links for Shiny Apps that I have developed.
 
-[My personal project website](https://www.williamokech.com/portfolio/projects)
+[My personal domain project website](https://www.williamokech.com/portfolio/projects)
 
 [My netlify project website](https://williamokech.netlify.app/portfolio/projects)
 
