@@ -14,6 +14,10 @@ library(randomForest)
 
 # Read data
 weather <- read.csv(text = getURL("https://raw.githubusercontent.com/dataprofessor/data/master/weather-weka.csv") )
+# Need to convert outlook and to factors
+weather$outlook <- as.factor(weather$outlook)
+weather$play <- as.factor(weather$play)
+str(weather)
 
 # Build model
 model <- randomForest(play ~ ., data = weather, ntree = 500, mtry = 4, importance = TRUE)

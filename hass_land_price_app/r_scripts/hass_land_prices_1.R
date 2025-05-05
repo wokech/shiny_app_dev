@@ -26,8 +26,8 @@ library(leaflet)
 
 # 1) Load the required data
 
-suburbs <- read_excel("hass_land_price_app/processed_tables/Hass Suburbs Combined 2015-2022.xlsx")
-satellite <- read_excel("hass_land_price_app/processed_tables/Hass Satellite Combined 2015-2022.xlsx")
+suburbs <- read_excel("hass_land_price_app/processed_tables/hass_suburbs_combined_2015_to_20XX.xlsx.xlsx")
+satellite <- read_excel("hass_land_price_app/processed_tables/hass_satellite_combined_2015_to_20XX.xlsx.xlsx")
 locations <- read_excel("hass_land_price_app/processed_tables/all_data_locations.xlsx")
 
 # 2) Clean the data
@@ -42,7 +42,8 @@ all_data <- rbind(suburbs, satellite)
 
 all_data <- all_data %>%
   mutate(quarter_double = 2 * quarter) %>%
-  mutate(quarter_year = paste(year, quarter_double, sep = "."))
+  mutate(quarter_year = paste(year, quarter_double, sep = ".")) %>%
+  mutate(quart_year_label = paste0("Q", quarter, " ", year))
 
 all_data$average_price <- as.numeric(all_data$average_price)
 all_data$x25th_percentile <- as.numeric(all_data$x25th_percentile)
@@ -51,14 +52,16 @@ all_data$quarter_year <- as.yearqtr(as.numeric(all_data$quarter_year))
 
 # For the plot
 all_data_avg_price <- all_data %>%
-  select(location, quarter_year, year, quarter, average_price)
+  select(location, quarter_year, year, quarter, average_price, quart_year_label)
 
 all_data_percentile_price <- all_data %>%
-  select(location, quarter_year, x25th_percentile, x75th_percentile)
+  select(location, quarter_year, x25th_percentile, x75th_percentile, quart_year_label)
 
 # For the data table
 all_data_avg_price_data <- all_data %>%
-  select(Location = location, Year = year, Quarter = quarter, "Average Price (KShs)" = average_price)
+  select(Location = location, Year = year, Quarter = quarter, "Average Price (KShs)" = average_price, quart_year_label)
+
+# Check data types 
 
 str(all_data_avg_price$quarter_year)
 str(all_data_percentile_price)

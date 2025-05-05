@@ -5,7 +5,7 @@ account: wokech
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 9197736
-bundleId: 10022685
+bundleId: 10218853
 url: https://wokech.shinyapps.io/hass_land_price_app/
 asMultiple: FALSE
 asStatic: FALSE

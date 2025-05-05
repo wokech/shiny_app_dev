@@ -89,9 +89,17 @@ server <- function(input, output) {
   # render the plot ----
   
   output$landprice_linePlot_1 <- renderPlotly({ 
-    ggplot(na.omit(location_df_1()), aes(quarter_year, average_price)) +
-      geom_line(aes(color = location), linewidth = 1) +
-      geom_point(aes(color = location), size = 2) +
+    plot_1 <- ggplot(na.omit(location_df_1()), 
+                     aes(quarter_year, 
+                         average_price,
+                         color = location,
+                         group = location,
+                         text = paste0("Year: ", quart_year_label,
+                                       "<br>Location: ", location,
+                                       "<br>Avg Price: KShs ", scales::comma(average_price))
+                         )) +
+      geom_line(linewidth = 0.625) +
+      geom_point(size = 1.25) +
       theme_classic() + 
       scale_y_continuous(labels = scales::comma) +
       scale_x_continuous(breaks = scales::pretty_breaks(n = 10)) +
@@ -113,14 +121,24 @@ server <- function(input, output) {
             plot.subtitle = element_text(size = 18),
             plot.background = element_rect(fill = "white", color = "white"),
             panel.background = element_rect(fill = "white", color = "white"))
+    
+    ggplotly(plot_1, tooltip = "text")
   }) 
   
   # render the plot ----
   
   output$landprice_linePlot_2 <- renderPlotly({ 
-    ggplot(na.omit(location_df_2()), aes(quarter_year, average_price)) +
-      geom_line(aes(color = location), linewidth = 1) +
-      geom_point(aes(color = location), size = 2) +
+    plot_2 <- ggplot(na.omit(location_df_2()), 
+                     aes(quarter_year, 
+                         average_price,
+                         color = location,
+                         group = location,
+                         text = paste0("Year: ", quart_year_label,
+                                       "<br>Location: ", location,
+                                       "<br>Avg Price: KShs ", scales::comma(average_price))
+                     )) +
+      geom_line(linewidth = 0.625) +
+      geom_point(size = 1.25) +
       theme_classic() + 
       scale_y_continuous(labels = scales::comma) +
       scale_x_continuous(breaks = scales::pretty_breaks(n = 10)) +
@@ -142,6 +160,9 @@ server <- function(input, output) {
             plot.subtitle = element_text(size = 18),
             plot.background = element_rect(fill = "white", color = "white"),
             panel.background = element_rect(fill = "white", color = "white"))
+    
+    ggplotly(plot_2, tooltip = "text")
+    
   }) 
 
   # Filter dataset based on selected location
