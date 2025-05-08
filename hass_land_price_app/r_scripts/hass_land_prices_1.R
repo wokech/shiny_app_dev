@@ -26,8 +26,8 @@ library(leaflet)
 
 # 1) Load the required data
 
-suburbs <- read_excel("hass_land_price_app/processed_tables/hass_suburbs_combined_2015_to_20XX.xlsx.xlsx")
-satellite <- read_excel("hass_land_price_app/processed_tables/hass_satellite_combined_2015_to_20XX.xlsx.xlsx")
+suburbs <- read_excel("hass_land_price_app/processed_tables/hass_suburbs_combined_2015_to_20XX.xlsx")
+satellite <- read_excel("hass_land_price_app/processed_tables/hass_satellite_combined_2015_to_20XX.xlsx")
 locations <- read_excel("hass_land_price_app/processed_tables/all_data_locations.xlsx")
 
 # 2) Clean the data
