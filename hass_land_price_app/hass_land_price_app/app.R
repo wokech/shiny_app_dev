@@ -94,7 +94,7 @@ server <- function(input, output) {
                          average_price,
                          color = location,
                          group = location,
-                         text = paste0("Year: ", quart_year_label,
+                         text = paste0("Year: ", `Quarter and Year`,
                                        "<br>Location: ", location,
                                        "<br>Avg Price: KShs ", scales::comma(average_price))
                          )) +
@@ -133,7 +133,7 @@ server <- function(input, output) {
                          average_price,
                          color = location,
                          group = location,
-                         text = paste0("Year: ", quart_year_label,
+                         text = paste0("Year: ", `Quarter and Year`,
                                        "<br>Location: ", location,
                                        "<br>Avg Price: KShs ", scales::comma(average_price))
                      )) +
@@ -210,7 +210,7 @@ server <- function(input, output) {
               options = list(pageLength = 10),
               caption = tags$caption(
                 style = 'caption-side: top; text-align: left;',
-                'Table 1: ', tags$em('Location, Year/Quarter, and Price'))) %>%
+                'Table 1: ', tags$em('Location, Quarter and Year, and Average Price (KShs)'))) %>%
       formatCurrency("Average Price (KShs)",currency = "", interval = 3, mark = ",") %>%
       formatRound("Average Price (KShs)", digits = 0)
     

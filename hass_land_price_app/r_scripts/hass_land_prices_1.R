@@ -32,18 +32,18 @@ locations <- read_excel("hass_land_price_app/processed_tables/all_data_locations
 
 # 2) Clean the data
 
-suburbs <- suburbs %>%
+suburbs <- suburbs |>
   clean_names()
 
-satellite <- satellite %>%
+satellite <- satellite |>
   clean_names()
 
 all_data <- rbind(suburbs, satellite)
 
-all_data <- all_data %>%
-  mutate(quarter_double = 2 * quarter) %>%
-  mutate(quarter_year = paste(year, quarter_double, sep = ".")) %>%
-  mutate(quart_year_label = paste0("Q", quarter, " ", year))
+all_data <- all_data |>
+  mutate(quarter_double = 2 * quarter) |>
+  mutate(quarter_year = paste(year, quarter_double, sep = ".")) |>
+  mutate(`Quarter and Year` = paste0("Q", quarter, " ", year))
 
 all_data$average_price <- as.numeric(all_data$average_price)
 all_data$x25th_percentile <- as.numeric(all_data$x25th_percentile)
@@ -51,15 +51,15 @@ all_data$x75th_percentile <- as.numeric(all_data$x75th_percentile)
 all_data$quarter_year <- as.yearqtr(as.numeric(all_data$quarter_year))
 
 # For the plot
-all_data_avg_price <- all_data %>%
-  select(location, quarter_year, year, quarter, average_price, quart_year_label)
+all_data_avg_price <- all_data |>
+  select(location, quarter_year, year, quarter, average_price, `Quarter and Year`)
 
-all_data_percentile_price <- all_data %>%
-  select(location, quarter_year, x25th_percentile, x75th_percentile, quart_year_label)
+all_data_percentile_price <- all_data |>
+  select(location, quarter_year, x25th_percentile, x75th_percentile, `Quarter and Year`)
 
 # For the data table
-all_data_avg_price_data <- all_data %>%
-  select(Location = location, Year = year, Quarter = quarter, "Average Price (KShs)" = average_price, quart_year_label)
+all_data_avg_price_data <- all_data |>
+  select(Location = location, Year = year, Quarter = quarter, "Average Price (KShs)" = average_price, `Quarter and Year`)
 
 # Check data types 
 
@@ -81,8 +81,8 @@ saveRDS(locations, "hass_land_price_app/hass_land_price_app/all_data_locations.r
 
 # use max to figure out groupings by average price
 
-max <- all_data_avg_price %>% 
-  group_by(location) %>%
+max <- all_data_avg_price |> 
+  group_by(location) |>
   summarize(max = max(average_price, na.rm = TRUE))
 
 location_1 <- c("Kiserian", "Kitengela", "Athi River", "Juja", "Thika")
@@ -94,48 +94,48 @@ location_4 <- c("Donholm", "Ridgeways", "Runda", "Loresho", "Kitisuru", "Ruaka")
 location_5 <- c("Nyari", "Muthaiga", "Spring Valley", "Lavington", "Gigiri", "Eastleigh")
 location_6 <- c("Kileleshwa", "Riverside", "Parklands", "Kilimani", "Westlands", "Upper Hill")
 
-all_data_avg_price %>%
-  filter(location %in% location_1) %>%
+all_data_avg_price |>
+  filter(location %in% location_1) |>
   ggplot(aes(quarter_year, average_price, color = location)) +
   geom_line() +
   geom_point() +
   theme_classic() + 
   scale_y_continuous(labels = scales::comma) 
   
-all_data_avg_price %>%
-  filter(location %in% location_2) %>%
+all_data_avg_price |>
+  filter(location %in% location_2) |>
   ggplot(aes(quarter_year, average_price, color = location)) +
   geom_line() +
   geom_point() +
   theme_classic() + 
   scale_y_continuous(labels = scales::comma) 
 
-all_data_avg_price %>%
-  filter(location %in% location_3) %>%
+all_data_avg_price |>
+  filter(location %in% location_3) |>
   ggplot(aes(quarter_year, average_price, color = location)) +
   geom_line() +
   geom_point() +
   theme_classic() + 
   scale_y_continuous(labels = scales::comma) 
 
-all_data_avg_price %>%
-  filter(location %in% location_4) %>%
+all_data_avg_price |>
+  filter(location %in% location_4) |>
   ggplot(aes(quarter_year, average_price, color = location)) +
   geom_line() +
   geom_point() +
   theme_classic() + 
   scale_y_continuous(labels = scales::comma) 
 
-all_data_avg_price %>%
-  filter(location %in% location_5) %>%
+all_data_avg_price |>
+  filter(location %in% location_5) |>
   ggplot(aes(quarter_year, average_price, color = location)) +
   geom_line() +
   geom_point() +
   theme_classic() + 
   scale_y_continuous(labels = scales::comma) 
 
-all_data_avg_price %>%
-  filter(location %in% location_6) %>%
+all_data_avg_price |>
+  filter(location %in% location_6) |>
   ggplot(aes(quarter_year, average_price, color = location)) +
   geom_line(size=2) +
   theme_classic() + 
@@ -162,8 +162,8 @@ all_data_avg_price %>%
 land_price <- readRDS("hass_land_price_app/hass_land_price_app/all_data_avg_price.rds")
 land_price_data <- readRDS("hass_land_price_app/hass_land_price_app/all_data_avg_price_data.rds")
 
-land_price %>%
-  group_by(location) %>%
+land_price |>
+  group_by(location) |>
   filter(quarter_year == max(quarter_year))
 
 
@@ -180,7 +180,7 @@ choices = c("Athi River", "Juja", "Kiambu", "Kiserian",
             "Kitengela", "Limuru", "Mlolongo", "Ngong", "Ongata Rongai",    
             "Ruaka", "Ruiru", "Syokimau", "Thika", "Tigoni")
 
-all_data_avg_price_data %>%
+all_data_avg_price_data |>
   filter(Year == 2023)
 
 
