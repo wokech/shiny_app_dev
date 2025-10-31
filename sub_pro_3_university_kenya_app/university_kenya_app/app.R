@@ -7,7 +7,7 @@ library(stringr)
 library(plotly)
 
 # Load the processed data
-universities <- readRDS("------.rds")
+universities <- readRDS("kenya_universities_list.rds")
 
 # UI
 ui <- fluidPage(
@@ -18,11 +18,11 @@ ui <- fluidPage(
     sidebarPanel(
       tags$h4("Filters"),
       selectInput("county", "Filter by County:",
-                  choices = c("All", sort(unique(universities$County))),
+                  choices = c("All", sort(unique(universities$county))),
                   selected = "All"),
       
       selectInput("governance", "Filter by Governance:",
-                  choices = c("All", sort(unique(universities$Governance))),
+                  choices = c("All", sort(unique(universities$governance))),
                   selected = "All"),
       
       checkboxInput("show_all", "Show All Universities on Map", value = TRUE),
@@ -30,7 +30,7 @@ ui <- fluidPage(
       conditionalPanel(
         condition = "!input.show_all",
         selectInput("selected_uni", "Select a University:",
-                    choices = universities$University)
+                    choices = universities$university)
       ),
       
       hr(),
@@ -53,11 +53,11 @@ server <- function(input, output, session) {
     data <- universities
     
     if (input$county != "All") {
-      data <- data %>% filter(County == input$county)
+      data <- data %>% filter(county == input$county)
     }
     
     if (input$governance != "All") {
-      data <- data %>% filter(Governance == input$governance)
+      data <- data %>% filter(governance == input$governance)
     }
     
     data
@@ -66,7 +66,7 @@ server <- function(input, output, session) {
   # Update university list dynamically
   observe({
     updateSelectInput(session, "selected_uni",
-                      choices = filtered_data()$University)
+                      choices = filtered_data()$university)
   })
   
   # Render map
@@ -85,31 +85,28 @@ server <- function(input, output, session) {
       leafletProxy("university_map") %>%
         addMarkers(
           data = data,
-          lng = ~Longitude,
-          lat = ~Latitude,
+          lng = ~longitude,
+          lat = ~latitude,
           clusterOptions = markerClusterOptions(),
           popup = ~paste0(
-            "<b><a href='", Website, "' target='_blank'>", University, "</a></b><br>",
-            "<b>County:</b> ", County, "<br>",
-            "<b>Governance:</b> ", Governance, "<br>",
-            "<b>Schools / Faculties:</b><br>",
-            "<ul>", paste0("<li>", str_trim(unlist(str_split(Schools_Faculties, ","))), collapse = "</li><li>"), "</li></ul>"
-          )
+            "<b>University:</b> ", university, "<br>",
+            "<b><a href='", website, "' target='_blank'>", "Website", "</a></b><br>",
+            "<b>County:</b> ", county, "<br>",
+            "<b>Governance:</b> ", governance, "<br>"
+            )
         )
     } else {
-      selected <- data %>% filter(University == input$selected_uni)
+      selected <- data %>% filter(university == input$selected_uni)
       if (nrow(selected) > 0) {
         popup <- paste0(
-          "<b><a href='", selected$Website, "' target='_blank'>", selected$University, "</a></b><br>",
-          "<b>County:</b> ", selected$County, "<br>",
-          "<b>Governance:</b> ", selected$Governance, "<br>",
-          "<b>Schools / Faculties:</b><br>",
-          "<ul>", paste0("<li>", str_trim(unlist(str_split(selected$Schools_Faculties, ","))), collapse = "</li><li>"), "</li></ul>"
-        )
+          "<b><a href='", selected$website, "' target='_blank'>", selected$university, "</a></b><br>",
+          "<b>County:</b> ", selected$county, "<br>",
+          "<b>Governance:</b> ", selected$governance, "<br>"
+          )
         leafletProxy("university_map") %>%
           addMarkers(
-            lng = selected$Longitude,
-            lat = selected$Latitude,
+            lng = selected$longitude,
+            lat = selected$latitude,
             popup = popup
           )
       }

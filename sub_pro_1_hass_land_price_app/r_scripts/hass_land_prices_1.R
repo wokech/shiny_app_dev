@@ -26,9 +26,9 @@ library(leaflet)
 
 # 1) Load the required data
 
-suburbs <- read_excel("hass_land_price_app/processed_tables/hass_suburbs_combined_2015_to_20XX.xlsx")
-satellite <- read_excel("hass_land_price_app/processed_tables/hass_satellite_combined_2015_to_20XX.xlsx")
-locations <- read_excel("hass_land_price_app/processed_tables/all_data_locations.xlsx")
+suburbs <- read_excel("sub_pro_1_hass_land_price_app/processed_tables/hass_suburbs_combined_2015_to_20XX.xlsx")
+satellite <- read_excel("sub_pro_1_hass_land_price_app/processed_tables/hass_satellite_combined_2015_to_20XX.xlsx")
+locations <- read_excel("sub_pro_1_hass_land_price_app/processed_tables/all_data_locations.xlsx")
 
 # 2) Clean the data
 
@@ -69,13 +69,13 @@ str(all_data_avg_price_data)
 
 # Store the dataset
 
-write.xlsx(all_data_avg_price, "hass_land_price_app/hass_land_price_app/all_data_avg_price.xlsx")
-write.xlsx(all_data_avg_price_data, "hass_land_price_app/hass_land_price_app/all_data_avg_price_data.xlsx")
-write.xlsx(locations, "hass_land_price_app/hass_land_price_app/all_data_locations.xlsx")
+write.xlsx(all_data_avg_price, "sub_pro_1_hass_land_price_app/hass_land_price_app/all_data_avg_price.xlsx")
+write.xlsx(all_data_avg_price_data, "sub_pro_1_hass_land_price_app/hass_land_price_app/all_data_avg_price_data.xlsx")
+write.xlsx(locations, "sub_pro_1_hass_land_price_app/hass_land_price_app/all_data_locations.xlsx")
 
-saveRDS(all_data_avg_price, "hass_land_price_app/hass_land_price_app/all_data_avg_price.rds")
-saveRDS(all_data_avg_price_data, "hass_land_price_app/hass_land_price_app/all_data_avg_price_data.rds")
-saveRDS(locations, "hass_land_price_app/hass_land_price_app/all_data_locations.rds")
+saveRDS(all_data_avg_price, "sub_pro_1_hass_land_price_app/hass_land_price_app/all_data_avg_price.rds")
+saveRDS(all_data_avg_price_data, "sub_pro_1_hass_land_price_app/hass_land_price_app/all_data_avg_price_data.rds")
+saveRDS(locations, "sub_pro_1_hass_land_price_app/hass_land_price_app/all_data_locations.rds")
 
 # 3) Plot  the data / EDA
 
@@ -159,8 +159,8 @@ all_data_avg_price |>
 
 ### TESTS FOR THE APP ###
 
-land_price <- readRDS("hass_land_price_app/hass_land_price_app/all_data_avg_price.rds")
-land_price_data <- readRDS("hass_land_price_app/hass_land_price_app/all_data_avg_price_data.rds")
+land_price <- readRDS("sub_pro_1_hass_land_price_app/hass_land_price_app/all_data_avg_price.rds")
+land_price_data <- readRDS("sub_pro_1_hass_land_price_app/hass_land_price_app/all_data_avg_price_data.rds")
 
 land_price |>
   group_by(location) |>

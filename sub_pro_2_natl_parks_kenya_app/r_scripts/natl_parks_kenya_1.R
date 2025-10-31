@@ -8,7 +8,7 @@ library(janitor)
 
 # Set the appropriate working directory
 
-nat_parks_ke <- read_excel("natl_parks_kenya_app/processed_tables/parks.xlsx")
+nat_parks_ke <- read_excel("sub_pro_2_natl_parks_kenya_app/processed_tables/parks.xlsx")
 
 # 3) Wrangle data
 
@@ -48,5 +48,5 @@ nat_parks_ke_clean_longer <- nat_parks_ke_clean |>
   mutate(year = as.numeric(year),
          visitors = as.integer(visitors))
 
-saveRDS(nat_parks_ke_clean_longer, "natl_parks_kenya_app/natl_parks_kenya_app/nat_parks_ke_data.rds")
-readRDS("natl_parks_kenya_app/natl_parks_kenya_app/nat_parks_ke_data.rds")
+saveRDS(nat_parks_ke_clean_longer, "sub_pro_2_natl_parks_kenya_app/natl_parks_kenya_app/nat_parks_ke_data.rds")
+readRDS("sub_pro_2_natl_parks_kenya_app/natl_parks_kenya_app/nat_parks_ke_data.rds")
