@@ -11,7 +11,7 @@ universities <- readRDS("kenya_universities_list.rds")
 
 # UI
 ui <- fluidPage(
-  theme = shinytheme("flatly"),
+  theme = shinytheme("superhero"),
   titlePanel("Kenyan Universities Map Explorer"),
   
   sidebarLayout(
@@ -48,6 +48,16 @@ ui <- fluidPage(
 # Server
 server <- function(input, output, session) {
   
+  # Define small icon
+  smallIcon <- makeIcon(
+    iconUrl = "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
+    #shadowUrl = "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
+    iconWidth = 10,
+    iconHeight = 16,
+    iconAnchorX = 10,
+    iconAnchorY = 16
+  )
+  
   # Reactive: Filtered dataset
   filtered_data <- reactive({
     data <- universities
@@ -72,7 +82,7 @@ server <- function(input, output, session) {
   # Render map
   output$university_map <- renderLeaflet({
     leaflet() %>%
-      addProviderTiles(providers$CartoDB.Positron) %>%
+      addTiles() %>%
       setView(lng = 37, lat = 0.5, zoom = 6)
   })
   
@@ -87,7 +97,8 @@ server <- function(input, output, session) {
           data = data,
           lng = ~longitude,
           lat = ~latitude,
-          clusterOptions = markerClusterOptions(),
+          icon = smallIcon,
+          #clusterOptions = markerClusterOptions(),
           popup = ~paste0(
             "<b>University:</b> ", university, "<br>",
             "<b><a href='", website, "' target='_blank'>", "Website", "</a></b><br>",
@@ -107,6 +118,7 @@ server <- function(input, output, session) {
           addMarkers(
             lng = selected$longitude,
             lat = selected$latitude,
+            icon = smallIcon,
             popup = popup
           )
       }

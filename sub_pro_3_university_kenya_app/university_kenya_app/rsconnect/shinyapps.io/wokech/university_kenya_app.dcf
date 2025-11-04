@@ -1,0 +1,12 @@
+name: university_kenya_app
+title: university_kenya_app
+username: wokech
+account: wokech
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 15935292
+bundleId: 11116641
+url: https://wokech.shinyapps.io/university_kenya_app/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE
