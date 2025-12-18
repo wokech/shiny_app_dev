@@ -21,3 +21,11 @@ This app was developed to provide insights into the visitor number data (for Ken
 [App Link](https://wokech.shinyapps.io/natl_parks_kenya_app/)
 
 ![Screenshot of National Parks Visitor Data](projects_images/national_park_data.png)
+
+## App 3: Kenyan Universities Map Explorer
+
+This app was developed to provide insights into the locations of Kenyan universities. The data source is the Commission for University Education (CUE) and Google Maps.
+
+[App Link](https://wokech.shinyapps.io/university_kenya_app/)
+
+![Screenshot of Kenyan Universities Map Explorer Data](projects_images/kenyan_uni_map_explorer.png)
